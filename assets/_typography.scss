@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
+
+@mixin f-h1 {
+    font-family: "Manrope";
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 58px;
+    letter-spacing: 2px;
+}
+
+@mixin f-h2 {
+    font-family: "Manrope";
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: 1.5px;
+}
+
+@mixin f-h3 {
+    font-family: "Manrope";
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: 1.15px;
+}
+
+@mixin f-h4 {
+    font-family: "Manrope";
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 38px;
+    letter-spacing: 2px;
+}
+
+@mixin f-h5 {
+    font-family: "Manrope";
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    letter-spacing: 1.7px;
+}
+
+@mixin f-h6 {
+    font-family: "Manrope";
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 1.3px;
+}
+
+@mixin f-content {
+    font-family: "Manrope";
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+
+@mixin f-overline {
+    font-family: "Manrope";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: 10px;
+}
+
+@mixin f-subtitle {
+    font-family: "Manrope";
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 25px;
+}
+
+@mixin f-button {
+    font-family: "Manrope";
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}

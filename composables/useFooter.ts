@@ -4,7 +4,7 @@ export default async () => {
     const { data, pending, error } = await useFetch<{ data: Footer }>(
       'http://localhost:1337/api/the-footer?populate=*'
     );
-    footer.value = data.value.data;
+    footer.value = data.value?.data;
   }
   return { footer, fetchFooter };
 };

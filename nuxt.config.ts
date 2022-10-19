@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   // ssr: false,
   css: ['@/assets/reset.scss'],
   modules: ['@pinia/nuxt', '@nuxtjs/strapi'],
+  build: {
+    transpile: ['@vuepic/vue-datepicker'],
+  },
   vite: {
     css: {
       preprocessorOptions: {

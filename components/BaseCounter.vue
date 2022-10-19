@@ -30,7 +30,6 @@ function decrement() {
 <style lang="scss" scoped>
 .base-counter {
   display: flex;
-
   &__button,
   &__display {
     @include f-button;
@@ -38,25 +37,21 @@ function decrement() {
     width: 40px;
     height: 48px;
   }
-
   &__button {
     border: none;
     cursor: pointer;
-
     &:hover {
       color: $color-1;
     }
-
     &[disabled] {
-      color: grey;
+      color: $grey-1;
       cursor: not-allowed;
       :hover,
       :focus {
-        color: grey;
+        color: $grey-1;
       }
     }
   }
-
   &__display {
     margin: 0px;
     text-align: center;

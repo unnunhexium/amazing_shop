@@ -95,7 +95,6 @@ const { data: featuredProductSmall } = await useFetch<{
   grid-template-rows: 560px 320px 320px;
   row-gap: 48px;
   padding-bottom: 12.5em;
-
   &__wrapper {
     &--large {
       background: $color-1;
@@ -134,19 +133,19 @@ const { data: featuredProductSmall } = await useFetch<{
     &--medium {
       display: flex;
       justify-content: space-between;
-      border-radius: 8px 8px;
+      border-radius: 8px;
     }
     &--medium,
     &--small {
       .featured-products__text {
         color: $dark-1;
+        border-radius: 8px;
       }
       .featured-products__img {
         max-height: 320px;
       }
     }
   }
-
   &__text {
     padding: 4.5em 0 4em 4em;
   }

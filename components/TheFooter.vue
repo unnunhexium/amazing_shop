@@ -3,7 +3,7 @@
     <NavBar class="the-footer__nav" :simplified="true" />
     <div class="the-footer__wrapper">
       <p class="the-footer__content">
-        {{ footer.attributes.content }}
+        {{ footer?.attributes.content }}
       </p>
       <div class="the-footer__media">
         <nuxt-link to="https://www.facebook.com/">
@@ -17,7 +17,7 @@
         </nuxt-link>
       </div>
     </div>
-    <p class="the-footer__copyrights">{{ footer.attributes.copyrights }}</p>
+    <p class="the-footer__copyrights">{{ footer?.attributes.copyrights }}</p>
   </div>
 </template>
 

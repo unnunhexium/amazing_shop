@@ -26,7 +26,7 @@
 interface Props {
   type?: string;
   disabled?: boolean;
-  url: string;
+  url?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -55,82 +55,68 @@ const emit = defineEmits(['click']);
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-
   &__arrow {
     margin-left: 13px;
   }
-
   &--primary {
     background: $color-1;
     color: $light-3;
     border: 1px solid transparent;
-
     &:hover {
       background: $color-2;
     }
-
     &:active {
       background: darken($color-1, 10%);
     }
-
     &:focus-visible {
       outline: none;
       background: darken($color-1, 20%);
     }
   }
-
   &--secondary {
     background: $light-3;
     border: 1px solid $dark-1;
-
     &:hover {
       background: $dark-1;
       color: $light-3;
     }
-
     &:active {
       background: $dark-1;
     }
-
     &:focus-visible {
       outline: none;
       background: $dark-1;
       color: $light-3;
     }
   }
-
   &--primary,
   &--secondary {
     &[disabled] {
       opacity: 50%;
-      background: grey;
+      background: $grey-1;
       cursor: not-allowed;
       :hover,
       :focus {
-        background: grey;
+        background: $grey-1;
       }
     }
   }
-
   &--tertiary {
     background: none;
     color: rgba(0, 0, 0, 0.5);
-
     &:hover {
       color: $color-1;
     }
-
     &:focus-visible {
       outline: none;
       color: $color-1;
     }
-
     &[disabled] {
-      color: grey;
+      color: $grey-1;
       cursor: not-allowed;
       :hover,
       :focus {
-        color: grey;
+        color: $grey-1;
       }
     }
   }

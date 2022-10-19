@@ -21,9 +21,14 @@
           </nuxt-link>
         </li>
       </ul>
-      <a href="" v-if="!simplified">
-        <img src="@/src/icon-cart.svg" />
-      </a>
+      <div class="nav-bar__icons-wrapper" v-if="!simplified">
+        <nuxt-link to="/checkout">
+          <img src="@/src/icon-cart.svg" />
+        </nuxt-link>
+        <nuxt-link to="/login">
+          <img src="@/src/icon-user.svg" />
+        </nuxt-link>
+      </div>
     </nav>
     <div class="nav-bar__line" v-if="!simplified" />
   </div>
@@ -50,13 +55,11 @@ h2 {
     justify-content: space-between;
     padding: 2em 0 2.25em;
   }
-
   &__list {
     display: flex;
     gap: 2em;
     list-style: none;
   }
-
   &__list-item {
     @include f-subtitle;
     color: $light-1;
@@ -64,7 +67,6 @@ h2 {
     text-transform: uppercase;
     text-decoration: none;
   }
-
   &__line {
     content: '';
     display: block;
@@ -74,6 +76,10 @@ h2 {
     background: $light-3;
     opacity: 20%;
     order: 1;
+  }
+  &__icons-wrapper {
+    display: flex;
+    gap: 20px;
   }
 }
 </style>

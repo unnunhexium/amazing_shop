@@ -3,17 +3,12 @@
     <NavBar />
     <NuxtPage />
     <TheFooter />
-    <!-- <BaseButton type="primary" class="featured-products__button">
-      See product
-    </BaseButton>
-    <BaseButton type="secondary" class="featured-products__button">
-      See product
-    </BaseButton>
-    <BaseButton type="tertiary" class="featured-products__button">
-      See product
-    </BaseButton> -->
   </div>
 </template>
+
+<script setup lang="ts">
+import '@vuepic/vue-datepicker/dist/main.css';
+</script>
 <style scoped lang="scss">
 // .main {
 //   box-sizing: content-box;

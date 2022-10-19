@@ -35,7 +35,6 @@ await fetchHero();
   margin-bottom: 12.5em;
   border-radius: 0 0 8px 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
   &__wrapper {
     width: 40%;
     margin-top: 8em;

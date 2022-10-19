@@ -20,10 +20,8 @@
   display: flex;
   justify-content: space-between;
   padding: 32px 0 36px;
-
   &__wrapper {
   }
-
   &__logo {
     // margin: 0 auto 0 42px;
   }

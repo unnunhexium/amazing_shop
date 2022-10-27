@@ -8,7 +8,7 @@
     <BaseButton
       class="category-tile__button"
       type="tertiary"
-      :url="`/categories/${category.attributes.name}`"
+      :url="`/categories/${category.id}`"
     >
       Shop
     </BaseButton>
@@ -16,6 +16,8 @@
 </template>
 
 <script setup lang="ts">
+import Category from '@/interfaces/Category';
+
 const props = defineProps<{ category: Category }>();
 </script>
 

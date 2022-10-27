@@ -36,7 +36,7 @@ export const useUser = defineStore({
         const router = useRouter();
         router.back();
       } catch (error) {
-        console.log(error.response);
+        console.error(error.response);
         return error.response._data.error.details.errors;
       }
     },
@@ -46,4 +46,5 @@ export const useUser = defineStore({
       navigateTo({ path: '/login' });
     },
   },
+  persist: true,
 });

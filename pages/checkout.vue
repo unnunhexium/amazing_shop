@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="checkout-page">
     <div class="layout-wrapper">this is the checkout page</div>
   </div>
 </template>

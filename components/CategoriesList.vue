@@ -9,13 +9,12 @@
 </template>
 
 <script setup lang="ts">
-const { categories, fetchCategories } = await useCategories();
-await fetchCategories();
+const { categories } = await useCategories();
 </script>
 
 <style lang="scss" scoped>
 .categories-list {
-  padding: 0 0 10.5em;
+  padding: 10.5em 0 10.5em;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-flow: row;

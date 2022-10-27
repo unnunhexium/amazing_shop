@@ -105,7 +105,7 @@ const buttonDisabled = computed((): boolean => {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding-top: 2em;
+    margin-top: 2.5em;
   }
   &__link {
     padding-left: 0;

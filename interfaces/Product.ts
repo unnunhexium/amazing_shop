@@ -1,4 +1,4 @@
-interface Product {
+export interface Product {
   id: string;
   attributes: ProductAttr;
 }
@@ -8,11 +8,13 @@ interface ProductAttr {
   price: number;
   features: string;
   slug: string;
-  image: Image;
+  main_image: Image;
 }
 interface Image {
   id: number;
-  attributes: ImageAttrs;
+  data: {
+    attributes: ImageAttrs;
+  };
 }
 interface ImageAttrs {
   url: string;

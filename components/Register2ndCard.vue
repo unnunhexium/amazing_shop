@@ -88,6 +88,14 @@ import Datepicker from '@vuepic/vue-datepicker';
 
 const props = defineProps<{ formData: Form; privacyPolicy: boolean }>();
 
+const attrs = reactive([
+  {
+    key: 'today',
+    highlight: 'grey',
+    dates: new Date(),
+  },
+]);
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -112,7 +120,6 @@ const buttonDisabled = computed((): boolean => {
 </script>
 
 <style lang="scss" scoped>
-@import '@vuepic/vue-datepicker/dist/main.css';
 .register-2nd-card {
   border-radius: 12px;
   box-shadow: 0px 4px 22px rgba(52, 53, 65, 0.15);
@@ -141,7 +148,7 @@ const buttonDisabled = computed((): boolean => {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding-top: 2em;
+    margin-top: 2.5em;
   }
   &__link {
     padding-left: 0;

@@ -32,10 +32,10 @@ await fetchAbout();
     justify-content: center;
   }
   &__header {
-    @include f-h4;
+    @include f-h2;
     text-transform: uppercase;
     max-width: 445px;
-    padding-bottom: 1.5em;
+    padding-bottom: 32px;
 
     &--color {
       color: $color-1;
@@ -49,7 +49,6 @@ await fetchAbout();
   }
   &__image {
     width: 100%;
-    max-width: 540px;
   }
 }
 </style>

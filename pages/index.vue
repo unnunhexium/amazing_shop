@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <TheHero />
-    <div class="layout-wrapper">
+    <div class="boxed-layout">
       <CategoriesList />
       <FeaturedProducts />
       <AboutTile />
@@ -10,8 +10,4 @@
 </template>
 
 <script setup lang="ts"></script>
-<style lang="scss" scoped>
-.layout-wrapper {
-  margin: 0 50px;
-}
-</style>
+<style lang="scss" scoped></style>

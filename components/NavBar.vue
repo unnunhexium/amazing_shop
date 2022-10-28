@@ -1,69 +1,73 @@
 <template>
   <div class="nav-bar">
-    <nav class="nav-bar__nav">
-      <a href="/">
-        <img src="@/src/logo.svg" />
-      </a>
-      <ul class="nav-bar__list">
-        <li>
-          <nuxt-link class="nav-bar__list-item" to="/"> Home </nuxt-link>
-        </li>
-        <li
-          v-for="category in categories"
-          :key="category.id"
-          :category="category"
-        >
-          <nuxt-link
-            class="nav-bar__list-item"
-            :to="`/categories/${category.id}`"
+    <div class="boxed-layout">
+      <nav class="nav-bar__nav">
+        <a href="/">
+          <img src="@/src/logo.svg" />
+        </a>
+        <ul class="nav-bar__list">
+          <li>
+            <nuxt-link class="nav-bar__list-item" to="/"> Home </nuxt-link>
+          </li>
+          <li
+            v-for="category in categories"
+            :key="category.id"
+            :category="category"
           >
-            {{ category.attributes.name }}
+            <nuxt-link
+              class="nav-bar__list-item"
+              :to="`/categories/${category.id}`"
+            >
+              {{ category.attributes.name }}
+            </nuxt-link>
+          </li>
+        </ul>
+        <div class="nav-bar__icons-wrapper" v-if="!simplified">
+          <nuxt-link to="/checkout">
+            <img src="@/src/icon-cart.svg" />
           </nuxt-link>
-        </li>
-      </ul>
-      <div class="nav-bar__icons-wrapper" v-if="!simplified">
-        <nuxt-link to="/checkout">
-          <img src="@/src/icon-cart.svg" />
-        </nuxt-link>
-        <div class="nav-bar__dropdown">
-          <button @click="toggleListVisibilty" class="nav-bar__dropdown-button">
-            <img src="@/src/icon-user.svg" />
-          </button>
-          <div class="nav-bar__dropdown-content">
-            <nuxt-link
-              v-if="!userStore.token"
-              to="/login"
-              class="nav-bar__dropdown-element"
-            >
-              Sign in
-              <div class="nav-bar__dropdown-element-line" />
-            </nuxt-link>
-            <nuxt-link
-              v-if="userStore.token"
-              to="/account"
-              class="nav-bar__dropdown-element"
-            >
-              My account
-            </nuxt-link>
-            <nuxt-link
-              class="nav-bar__dropdown-element"
-              v-if="!userStore.token"
-              to="/register"
-            >
-              Sign up
-            </nuxt-link>
+          <div class="nav-bar__dropdown">
             <button
-              class="nav-bar__dropdown-element nav-bar__dropdown-element--button"
-              v-if="userStore.token"
-              @click="userStore.token = null"
+              @click="toggleListVisibilty"
+              class="nav-bar__dropdown-button"
             >
-              Log out
+              <img src="@/src/icon-user.svg" />
             </button>
+            <div class="nav-bar__dropdown-content">
+              <nuxt-link
+                v-if="!userStore.token"
+                to="/login"
+                class="nav-bar__dropdown-element"
+              >
+                Sign in
+              </nuxt-link>
+              <nuxt-link
+                v-if="userStore.token"
+                to="/account"
+                class="nav-bar__dropdown-element"
+              >
+                My account
+              </nuxt-link>
+              <nuxt-link
+                class="nav-bar__dropdown-element"
+                v-if="!userStore.token"
+                to="/register"
+              >
+                Sign up
+              </nuxt-link>
+              <button
+                class="nav-bar__dropdown-element nav-bar__dropdown-element--button"
+                v-if="userStore.token"
+                @click="userStore.token = null"
+              >
+                Log out
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
-    <div class="nav-bar__line" v-if="!simplified" />
+      </nav>
+      <div class="nav-bar__line" v-if="!simplified" />
+    </div>
   </div>
 </template>
 
@@ -94,7 +98,8 @@ h2 {
   &__nav {
     display: flex;
     justify-content: space-between;
-    padding: 2em 0 2.25em;
+    padding-top: 2em;
+    padding-bottom: 2.25em;
   }
   &__list {
     display: flex;
@@ -111,12 +116,11 @@ h2 {
   &__line {
     content: '';
     display: block;
-    // position: relative;
     height: 1px;
-    // width: 100%;
+    width: 100%;
     background: $light-3;
     opacity: 20%;
-    order: 1;
+    order: 22;
   }
   &__icons-wrapper {
     display: flex;
@@ -126,12 +130,13 @@ h2 {
     display: flex;
     flex-direction: column;
     display: inline-block;
+    position: relative;
     &:hover > .nav-bar__dropdown-content {
       display: flex;
       flex-direction: column;
       position: absolute;
-      right: 52px;
-      top: 55px;
+      right: 0;
+      top: 15px;
       width: 120px;
     }
   }
@@ -143,6 +148,7 @@ h2 {
     display: none;
     text-align: right;
     padding: 0.5em 0;
+    margin-top: 1em;
     background: $grey-1;
     border-radius: 4px;
     z-index: 2;
@@ -161,13 +167,6 @@ h2 {
       border: none;
       text-align: end;
     }
-    // &:not(:last-of-type)::after {
-    //   display: inline-block;
-    //   content: '';
-    //   border-top: 1px solid $dark-1;
-    //   z-index: 2;
-    //   width: 100%;
-    // }
   }
 }
 </style>

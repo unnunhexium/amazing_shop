@@ -14,7 +14,7 @@ const { categories } = await useCategories();
 
 <style lang="scss" scoped>
 .categories-list {
-  padding: 10.5em 0 10.5em;
+  padding: 5em 0 10.5em;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-flow: row;

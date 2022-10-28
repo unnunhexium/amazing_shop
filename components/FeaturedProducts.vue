@@ -64,19 +64,7 @@
 
 <script setup lang="ts">
 import { FeaturedProduct } from '@/interfaces/FeaturedProduct';
-// import { getFeaturedProducts } from '@/api/featuredProductsService';
-// const [
-//   { data: featuredProductLarge },
-//   { data: featuredProductMedium },
-//   { data: featuredProductSmall },
-// ] = await Promise.all([
-//   await getFeaturedProducts('large'),
-//   await getFeaturedProducts('medium'),
-//   await getFeaturedProducts('small'),
-// ]);
-// const featuredProductMedium = await getFeaturedProducts('medium');
-// const featuredProductSmall = await getFeaturedProducts('small');
-// const featuredProductLarge = await getFeaturedProducts('large');
+
 const { data: featuredProductLarge } = await useFetch<{
   data: FeaturedProduct;
 }>('http://localhost:1337/api/featured-product-tile-large?populate=*');
@@ -104,6 +92,9 @@ const { data: featuredProductSmall } = await useFetch<{
         max-height: 480px;
         align-self: flex-end;
       }
+      .featured-products__text {
+        padding-left: 60px;
+      }
     }
     &--medium {
       .featured-products__img {
@@ -112,8 +103,9 @@ const { data: featuredProductSmall } = await useFetch<{
         object-fit: cover;
       }
       .featured-products__text {
-        left: 140px;
         position: absolute;
+        margin-top: 100px;
+        margin-left: 60px;
       }
     }
     &--small {
@@ -140,6 +132,7 @@ const { data: featuredProductSmall } = await useFetch<{
       .featured-products__text {
         color: $dark-1;
         border-radius: 8px;
+        padding-left: 60px;
       }
       .featured-products__img {
         max-height: 320px;
@@ -147,7 +140,10 @@ const { data: featuredProductSmall } = await useFetch<{
     }
   }
   &__text {
-    padding: 4.5em 0 4em 4em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
   }
   &__subheader {
     @include f-overline;
@@ -156,14 +152,15 @@ const { data: featuredProductSmall } = await useFetch<{
   }
   &__h1 {
     @include f-h1;
+    padding-bottom: 24px;
   }
   &__h4 {
     @include f-h4;
+    padding-bottom: 32px;
   }
   &__h1,
   &__h4 {
     text-transform: uppercase;
-    padding: 24px 0;
   }
   &__content {
     @include f-content;
@@ -182,9 +179,8 @@ const { data: featuredProductSmall } = await useFetch<{
   }
   &__img {
     max-height: 560px;
-    max-width: 100%;
     display: inline-block;
-    border-radius: 8px 8px;
+    border-radius: 8px;
   }
 }
 </style>

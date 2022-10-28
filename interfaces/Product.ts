@@ -3,12 +3,14 @@ export interface Product {
   attributes: ProductAttr;
 }
 interface ProductAttr {
+  flag: string;
   name: string;
-  description: string;
-  price: number;
-  features: string;
-  slug: string;
-  main_image: Image;
+  description?: string;
+  price?: number;
+  features?: string;
+  slug?: string;
+  image: Image;
+  id?: string;
 }
 interface Image {
   id: number;

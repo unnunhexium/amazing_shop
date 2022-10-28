@@ -1,3 +1,5 @@
+import { Hero } from '@/interfaces/Hero';
+
 export default async () => {
   const hero = ref<Hero>(null);
   async function fetchHero() {

@@ -3,9 +3,10 @@
     <div class="category-page__header">
       {{ category.attributes.name }}
     </div>
-    <div class="layout-wrapper boxed-layout">
+    <div class="boxed-layout">
       <div>
         <ProductCard
+          class="category-page__product-card"
           v-for="(product, index) in products"
           :product="product"
           :reversed="index % 2 === 1"
@@ -26,7 +27,7 @@ const query = qs.stringify(
   {
     populate: {
       products: {
-        populate: ['main_image'],
+        populate: ['image'],
       },
     },
   },
@@ -39,7 +40,13 @@ const { data: category } = await useApi<{ data: Category }>(
 );
 
 const products = computed(() => {
-  return category.attributes.products.data;
+  return category.attributes.products.data.map((product) => ({
+    id: product.id,
+    name: product.attributes.name,
+    description: product.attributes.description,
+    flag: product.attributes.flag,
+    imageUrl: product.attributes.image.data.attributes.url,
+  }));
 });
 </script>
 
@@ -54,6 +61,9 @@ const products = computed(() => {
     text-align: center;
     padding-top: 98px;
     margin-bottom: 160px;
+  }
+  &__product-card {
+    margin-bottom: 10em;
   }
 }
 </style>

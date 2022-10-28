@@ -1,14 +1,14 @@
 <template>
   <div :class="productCardClasses">
     <img
-      :src="`http://localhost:1337${product?.attributes.main_image.data?.attributes.url}`"
+      :src="`http://localhost:1337${product.imageUrl}`"
       class="product-card__img"
     />
     <div class="product-card__wrapper">
-      <p class="product-card__flag" v-if="flag">New product</p>
-      <h1 class="product-card__header">{{ product.attributes.name }}</h1>
+      <p class="product-card__flag" v-if="product.flag">{{ product.flag }}</p>
+      <h1 class="product-card__header">{{ product.name }}</h1>
       <p class="product-card__content">
-        {{ product.attributes.description }}
+        {{ product.description }}
       </p>
       <BaseButton type="primary" :url="`/products/${product.id}`">
         See product
@@ -22,8 +22,17 @@
 </template>
 
 <script setup lang="ts">
-import { Product } from '@/interfaces/Product';
-const props = defineProps<{ product: Product; reversed: boolean }>();
+interface Props {
+  product: {
+    id: string;
+    name: string;
+    description: string;
+    flag: string;
+    imageUrl: string;
+  };
+  reversed?: boolean;
+}
+const props = defineProps<Props>();
 const flag = ref(true);
 
 const productCardClasses = computed(() => {
@@ -35,7 +44,6 @@ const productCardClasses = computed(() => {
 .product-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-bottom: 10em;
   &__wrapper {
     display: flex;
     flex-direction: column;

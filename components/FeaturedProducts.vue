@@ -65,13 +65,13 @@
 <script setup lang="ts">
 import { FeaturedProduct } from '@/interfaces/FeaturedProduct';
 
-const { data: featuredProductLarge } = await useFetch<{
+const { data: featuredProductLarge } = await useLazyFetch<{
   data: FeaturedProduct;
 }>('http://localhost:1337/api/featured-product-tile-large?populate=*');
-const { data: featuredProductMedium } = await useFetch<{
+const { data: featuredProductMedium } = await useLazyFetch<{
   data: FeaturedProduct;
 }>('http://localhost:1337/api/featured-product-tile-medium?populate=*');
-const { data: featuredProductSmall } = await useFetch<{
+const { data: featuredProductSmall } = await useLazyFetch<{
   data: FeaturedProduct;
 }>('http://localhost:1337/api/featured-product-tile-small?populate=*');
 </script>

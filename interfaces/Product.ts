@@ -1,8 +1,8 @@
 export interface Product {
-  id: string;
+  id: number;
   attributes: ProductAttr;
 }
-interface ProductAttr {
+export interface ProductAttr {
   flag: string;
   name: string;
   description?: string;
@@ -10,22 +10,33 @@ interface ProductAttr {
   features?: string;
   slug?: string;
   image: Image;
-  id?: string;
+  large_image?: Image;
+  small_image_1?: Image;
+  small_image_2?: Image;
+  id?: number;
+  product_items?: ProductItems;
 }
-interface Image {
+export interface ProductItems {
+  data: {
+    id: number;
+    quantity: string;
+    name: string;
+  };
+}
+export interface Image {
   id: number;
   data: {
     attributes: ImageAttrs;
   };
 }
-interface ImageAttrs {
+export interface ImageAttrs {
   url: string;
   formats: {
     thumbnail: Thumbnail;
     small: Thumbnail;
   };
 }
-interface Thumbnail {
+export interface Thumbnail {
   name: string;
   url: string;
 }

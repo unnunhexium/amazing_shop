@@ -10,12 +10,19 @@
       <p class="product-card__content">
         {{ product.description }}
       </p>
-      <BaseButton type="primary" :url="`/products/${product.id}`">
+      <BaseButton
+        v-if="simplified"
+        type="primary"
+        :url="`/products/${product.id}`"
+      >
         See product
       </BaseButton>
-      <div v-if="!flag">
-        <BaseCounter />
-        <BaseButton type="primary">Add to cart</BaseButton>
+      <div v-else>
+        <p class="product-card__price">$ {{ product.price }}</p>
+        <div class="product-card__button-wrapper">
+          <BaseCounter />
+          <BaseButton type="primary">Add to cart</BaseButton>
+        </div>
       </div>
     </div>
   </div>
@@ -24,19 +31,29 @@
 <script setup lang="ts">
 interface Props {
   product: {
-    id: string;
+    id: number;
     name: string;
     description: string;
     flag: string;
     imageUrl: string;
+    price: number;
+    // product_items: ProductItems;
   };
   reversed?: boolean;
+  simplified?: boolean;
+  reduced?: boolean;
 }
 const props = defineProps<Props>();
-const flag = ref(true);
 
 const productCardClasses = computed(() => {
-  return ['product-card', { 'product-card--reversed': props.reversed }];
+  return [
+    'product-card',
+    {
+      'product-card--reversed': props.reversed,
+      'product-card--simplified': props.simplified,
+      'product-card--reduced': props.reduced,
+    },
+  ];
 });
 </script>
 
@@ -44,6 +61,9 @@ const productCardClasses = computed(() => {
 .product-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  &__img {
+    border-radius: 8px;
+  }
   &__wrapper {
     display: flex;
     flex-direction: column;
@@ -67,7 +87,14 @@ const productCardClasses = computed(() => {
   &__content {
     @include f-content;
     opacity: 0.75;
-    padding-bottom: 40px;
+  }
+  &__price {
+    @include f-h6;
+    margin-bottom: 45px;
+  }
+  &__button-wrapper {
+    display: flex;
+    gap: 0.5em;
   }
 
   &--reversed {
@@ -77,9 +104,26 @@ const productCardClasses = computed(() => {
       grid-column: 1;
       grid-row: 1;
     }
-
     .product-card__img {
       grid-column: 2;
+    }
+  }
+
+  &--simplified {
+    .product-card__header {
+      padding: 24px 0 24px;
+    }
+    .product-card__content {
+      padding-bottom: 40px;
+    }
+  }
+  &--reduced {
+    .product-card__header {
+      @include f-h2;
+      padding: 16px 0 32px;
+    }
+    .product-card__content {
+      padding-bottom: 40px;
     }
   }
 }

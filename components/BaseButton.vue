@@ -91,7 +91,7 @@ const emit = defineEmits(['click']);
   }
   &--primary,
   &--secondary {
-    &[disabled] {
+    &[disabled='true'] {
       opacity: 50%;
       background: $grey-1;
       cursor: not-allowed;
@@ -111,7 +111,7 @@ const emit = defineEmits(['click']);
       outline: none;
       color: $color-1;
     }
-    &[disabled] {
+    &[disabled='true'] {
       color: $grey-1;
       cursor: not-allowed;
       :hover,

@@ -10,6 +10,8 @@
 </template>
 
 <script setup lang="ts">
+import { Hero } from '@/interfaces/Hero';
+
 const error = ref<Hero>(null);
 const loginData = reactive({
   email: '',

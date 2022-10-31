@@ -1,8 +1,8 @@
 <template>
   <div class="category-page">
-    <div class="category-page__header">
+    <h2 class="category-page__header">
       {{ category.attributes.name }}
-    </div>
+    </h2>
     <div class="boxed-layout">
       <div>
         <ProductCard
@@ -10,6 +10,8 @@
           v-for="(product, index) in products"
           :product="product"
           :reversed="index % 2 === 1"
+          :simplified="true"
+          :reduced="true"
         />
         <CategoriesList />
         <AboutTile />
@@ -46,6 +48,7 @@ const products = computed(() => {
     description: product.attributes.description,
     flag: product.attributes.flag,
     imageUrl: product.attributes.image.data.attributes.url,
+    price: null,
   }));
 });
 </script>
@@ -53,13 +56,12 @@ const products = computed(() => {
 <style lang="scss" scoped>
 .category-page {
   &__header {
-    @include f-h1;
+    @include f-h2;
     text-transform: uppercase;
     color: $light-3;
     background: $dark-1;
-    height: 200px;
     text-align: center;
-    padding-top: 98px;
+    padding: 98px 0;
     margin-bottom: 160px;
   }
   &__product-card {

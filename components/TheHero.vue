@@ -1,7 +1,7 @@
 <template>
   <div class="the-hero">
     <div class="boxed-layout">
-      <ProductCard :product="heroData" :reversed="true" />
+      <ProductCard :product="heroData" :reversed="true" :simplified="true" />
     </div>
   </div>
 </template>
@@ -16,6 +16,7 @@ const heroData = computed(() => ({
   description: hero.value.attributes.description,
   flag: hero.value.attributes.flag,
   imageUrl: hero.value.attributes.image.data.attributes.url,
+  price: null,
 }));
 </script>
 

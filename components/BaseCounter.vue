@@ -35,7 +35,7 @@ function decrement() {
     @include f-button;
     background: $light-1;
     width: 40px;
-    height: 48px;
+    height: 50px;
   }
   &__button {
     border: none;

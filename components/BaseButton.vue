@@ -10,7 +10,7 @@
   <nuxt-link
     v-else
     :class="buttonClasses"
-    :to="`http://localhost:3001${url}`"
+    :to="`http://localhost:3000${url}`"
     :disabled="disabled"
   >
     <slot />
@@ -51,7 +51,6 @@ const emit = defineEmits(['click']);
   padding: 15px 30px;
   cursor: pointer;
   border: none;
-  // display: inline-block;
   display: inline-flex;
   align-items: center;
   text-decoration: none;

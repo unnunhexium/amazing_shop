@@ -23,46 +23,23 @@
           </li>
         </ul>
         <div class="nav-bar__icons-wrapper" v-if="!simplified">
-          <nuxt-link to="/checkout">
-            <img src="@/src/icon-cart.svg" />
-          </nuxt-link>
           <div class="nav-bar__dropdown">
-            <button
-              @click="toggleListVisibilty"
-              class="nav-bar__dropdown-button"
+            <nuxt-link class="nav-bar__dropdown" to="/checkout">
+              <img src="@/src/icon-cart.svg" />
+            </nuxt-link>
+            <CartCard class="nav-bar__dropdown-content" />
+          </div>
+
+          <div class="nav-bar__dropdown">
+            <nuxt-link
+              class="nav-bar__dropdown"
+              to="/account"
+              tag="button"
+              :disabled="!userStore.token"
             >
               <img src="@/src/icon-user.svg" />
-            </button>
-            <div class="nav-bar__dropdown-content">
-              <nuxt-link
-                v-if="!userStore.token"
-                to="/login"
-                class="nav-bar__dropdown-element"
-              >
-                Sign in
-              </nuxt-link>
-              <nuxt-link
-                v-if="userStore.token"
-                to="/account"
-                class="nav-bar__dropdown-element"
-              >
-                My account
-              </nuxt-link>
-              <nuxt-link
-                class="nav-bar__dropdown-element"
-                v-if="!userStore.token"
-                to="/register"
-              >
-                Sign up
-              </nuxt-link>
-              <button
-                class="nav-bar__dropdown-element nav-bar__dropdown-element--button"
-                v-if="userStore.token"
-                @click="userStore.token = null"
-              >
-                Log out
-              </button>
-            </div>
+            </nuxt-link>
+            <UserActions class="nav-bar__dropdown-content" />
           </div>
         </div>
       </nav>
@@ -74,19 +51,13 @@
 <script setup lang="ts">
 import { useUser } from '@/store/user';
 
-const userStore = useUser();
-
 withDefaults(defineProps<{ simplified?: boolean }>(), {
   simplified: false,
 });
 
-const listVisibilty = ref<boolean>();
-
 const { categories } = await useCategories();
 
-function toggleListVisibilty() {
-  listVisibilty.value = !listVisibilty.value;
-}
+const userStore = useUser();
 </script>
 
 <style lang="scss" scoped>
@@ -126,46 +97,23 @@ h2 {
     display: flex;
     gap: 20px;
   }
+
   &__dropdown {
     display: flex;
     flex-direction: column;
     display: inline-block;
     position: relative;
+
+    .nav-bar__dropdown-content {
+      display: none;
+      z-index: 2;
+    }
     &:hover > .nav-bar__dropdown-content {
       display: flex;
       flex-direction: column;
       position: absolute;
       right: 0;
-      top: 15px;
-      width: 120px;
-    }
-  }
-  &__dropdown-button {
-    all: unset;
-    cursor: pointer;
-  }
-  &__dropdown-content {
-    display: none;
-    text-align: right;
-    padding: 0.5em 0;
-    margin-top: 1em;
-    background: $grey-1;
-    border-radius: 4px;
-    z-index: 2;
-  }
-  &__dropdown-element {
-    @include f-button;
-    text-decoration: none;
-    color: $dark-1;
-    height: 30px;
-    padding: 0.5em 0.75em 0 0;
-    &:hover {
-      color: $color-1;
-    }
-    &--button {
-      background: none;
-      border: none;
-      text-align: end;
+      top: 35px;
     }
   }
 }

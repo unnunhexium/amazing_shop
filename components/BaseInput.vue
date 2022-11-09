@@ -1,6 +1,6 @@
 <template>
   <div class="base-input">
-    <label class="base-input__label">
+    <label :class="labelClasses">
       {{ label }}
       <input
         class="base-input__input"
@@ -25,9 +25,17 @@ interface Props {
   placeholder: string;
   errorMessage?: string;
   modelValue: string;
+  labelBold?: boolean;
 }
 
-withDefaults(defineProps<Props>(), { type: 'text' });
+const props = withDefaults(defineProps<Props>(), {
+  type: 'text',
+  labelBold: false,
+});
+
+const labelClasses = computed(() => {
+  return props.labelBold ? 'base-input__label-1' : 'base-input__label-2';
+});
 </script>
 
 <style lang="scss" scoped>
@@ -38,7 +46,13 @@ withDefaults(defineProps<Props>(), { type: 'text' });
   &__input {
     display: block;
   }
-  &__label {
+  &__label-1 {
+    font-family: 'Manrope';
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  &__label-2 {
     @include f-content;
     color: $color-1;
     text-transform: uppercase;

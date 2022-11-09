@@ -1,5 +1,5 @@
 <template>
-  <div class="base-counter">
+  <div :class="counterClasses">
     <button
       class="base-counter__button"
       @click="decrement"
@@ -15,9 +15,13 @@
 <script setup lang="ts">
 const value = ref(0);
 
-const props = withDefaults(defineProps<{ disabled?: boolean }>(), {
-  disabled: false,
-});
+const props = withDefaults(
+  defineProps<{ disabled?: boolean; reduced?: boolean }>(),
+  {
+    disabled: false,
+    reduced: false,
+  }
+);
 
 function increment() {
   this.value++;
@@ -25,11 +29,26 @@ function increment() {
 function decrement() {
   this.value--;
 }
+
+const counterClasses = computed(() => {
+  return ['base-counter', { 'base-counter--reduced': props.reduced }];
+});
 </script>
 
 <style lang="scss" scoped>
 .base-counter {
   display: flex;
+  &--reduced {
+    height: 32px;
+    .base-counter__button,
+    .base-counter__display {
+      width: 32px;
+      height: 32px;
+    }
+    .base-counter__display {
+      line-height: 32px;
+    }
+  }
   &__button,
   &__display {
     @include f-button;

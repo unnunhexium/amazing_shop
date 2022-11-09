@@ -5,7 +5,9 @@
       class="product-card__img"
     />
     <div class="product-card__wrapper">
-      <p class="product-card__flag" v-if="product.flag">{{ product.flag }}</p>
+      <p class="product-card__flag" v-if="product.flag">
+        {{ product.flag }}
+      </p>
       <h1 class="product-card__header">{{ product.name }}</h1>
       <p class="product-card__content">
         {{ product.description }}
@@ -21,7 +23,7 @@
         <p class="product-card__price">$ {{ product.price }}</p>
         <div class="product-card__button-wrapper">
           <BaseCounter />
-          <BaseButton type="primary">Add to cart</BaseButton>
+          <BaseButton type="primary" @click="addToCart">Add to cart</BaseButton>
         </div>
       </div>
     </div>
@@ -29,6 +31,9 @@
 </template>
 
 <script setup lang="ts">
+import { useCartStore } from '@/store/cart';
+import { storeToRefs } from 'pinia';
+
 interface Props {
   product: {
     id: number;
@@ -37,7 +42,6 @@ interface Props {
     flag: string;
     imageUrl: string;
     price: number;
-    // product_items: ProductItems;
   };
   reversed?: boolean;
   simplified?: boolean;
@@ -55,6 +59,13 @@ const productCardClasses = computed(() => {
     },
   ];
 });
+
+const cartStore = useCartStore();
+const { cart } = storeToRefs(cartStore);
+
+const addToCart = () => {
+  cartStore.addToCart({ id: props.product.id, qty: 1 });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -80,9 +91,9 @@ const productCardClasses = computed(() => {
     @include f-h1;
     text-transform: uppercase;
     padding: 24px 0;
-    @include lg {
-      @include f-h3;
-    }
+    // @include lg {
+    //   @include f-h3;
+    // }
   }
   &__content {
     @include f-content;

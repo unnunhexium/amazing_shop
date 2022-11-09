@@ -4,7 +4,6 @@
       class="account-card__input"
       @update:modelValue="
         $emit('set-form-field', {
-          value: capitalizeFirstLetter($event),
           key: 'email',
         })
       "
@@ -23,7 +22,7 @@
       "
       :modelValue="accountData.password"
       type="text"
-      placeholder="e.g. Jessica"
+      placeholder="e.g. ******"
       label="Password"
     />
     <BaseInput

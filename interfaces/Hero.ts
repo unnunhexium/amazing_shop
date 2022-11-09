@@ -1,5 +1,5 @@
 export interface Hero {
-  id: string;
+  id: number;
   attributes: HeroAttr;
 }
 export interface HeroAttr {
@@ -20,6 +20,6 @@ export interface ImageAttrs {
 }
 export interface Product {
   data: {
-    id: string;
+    id: number;
   };
 }

@@ -5,6 +5,7 @@ export interface Product {
 export interface ProductAttr {
   flag: string;
   name: string;
+  name_short?: string;
   description?: string;
   price?: number;
   features?: string;

@@ -25,7 +25,7 @@ interface Props {
   placeholder: string;
   errorMessage?: string;
   modelValue: string;
-  labelBold?: boolean;
+  labelPrimary?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -34,7 +34,9 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const labelClasses = computed(() => {
-  return props.labelBold ? 'base-input__label-1' : 'base-input__label-2';
+  return props.labelPrimary
+    ? 'base-input__label--primary'
+    : 'base-input__label--secondary';
 });
 </script>
 
@@ -46,16 +48,20 @@ const labelClasses = computed(() => {
   &__input {
     display: block;
   }
-  &__label-1 {
+  &__label--primary,
+  &__label--secondary {
     font-family: 'Manrope';
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 16px;
-  }
-  &__label-2 {
-    @include f-content;
-    color: $color-1;
+    font-weight: 500;
     text-transform: uppercase;
+  }
+  &__label {
+    &--primary {
+      font-size: 15px;
+      color: $color-1;
+    }
+    &--secondary {
+      font-size: 12px;
+    }
   }
   &__error {
     font-family: 'Manrope';

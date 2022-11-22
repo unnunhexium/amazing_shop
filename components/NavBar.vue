@@ -27,7 +27,9 @@
             <nuxt-link class="nav-bar__dropdown" to="/checkout">
               <img src="@/src/icon-cart.svg" />
             </nuxt-link>
-            <CartCard class="nav-bar__dropdown-content" />
+            <ClientOnly>
+              <CartCard class="nav-bar__dropdown-content" />
+            </ClientOnly>
           </div>
 
           <div class="nav-bar__dropdown">
@@ -83,6 +85,9 @@ h2 {
     letter-spacing: 2px;
     text-transform: uppercase;
     text-decoration: none;
+    &:hover {
+      color: $color-1;
+    }
   }
   &__line {
     content: '';
@@ -113,7 +118,7 @@ h2 {
       flex-direction: column;
       position: absolute;
       right: 0;
-      top: 35px;
+      top: 30px;
     }
   }
 }

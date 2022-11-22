@@ -110,7 +110,7 @@ const emit = defineEmits(['click']);
       outline: none;
       color: $color-1;
     }
-    &[disabled='true'] {
+    &:disabled {
       color: $grey-1;
       cursor: not-allowed;
       :hover,

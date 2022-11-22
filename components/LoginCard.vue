@@ -10,6 +10,7 @@
       placeholder="Please enter your email."
       :errorMessage="errorMessage"
       label="email"
+      labelPrimary
     >
     </BaseInput>
     <p>{{ loginErrorContent('identifier') }}</p>
@@ -22,6 +23,7 @@
       type="password"
       placeholder="Please enter your password."
       label="password"
+      labelPrimary
     >
     </BaseInput>
     <p class="login-card__error">{{ loginErrorContent('password') }}</p>

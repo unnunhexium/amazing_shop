@@ -16,6 +16,7 @@
       type="text"
       placeholder="e.g. Jessica"
       label="Name"
+      labelPrimary
     />
     <BaseInput
       class="register-2nd-card__input"
@@ -29,6 +30,7 @@
       type="text"
       placeholder="e.g. Jones"
       label="Surname"
+      labelPrimary
     />
     <label class="register-2nd-card__input--label">Date of birth</label>
     <Datepicker

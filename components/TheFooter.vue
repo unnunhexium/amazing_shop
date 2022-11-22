@@ -8,13 +8,13 @@
         </p>
         <div class="the-footer__media">
           <nuxt-link to="https://www.facebook.com/">
-            <img src="@/src/icon-facebook.svg" />
+            <img src="@/src/icon-facebook.svg" class="the-footer__icon" />
           </nuxt-link>
           <nuxt-link to="https://www.twitter.com/">
-            <img src="@/src/icon-twitter.svg" />
+            <img src="@/src/icon-twitter.svg" class="the-footer__icon" />
           </nuxt-link>
           <nuxt-link to="https://www.instagram.com/">
-            <img src="@/src/icon-instagram.svg" />
+            <img src="@/src/icon-instagram.svg" class="the-footer__icon" />
           </nuxt-link>
         </div>
       </div>

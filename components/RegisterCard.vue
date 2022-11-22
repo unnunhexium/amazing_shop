@@ -10,6 +10,7 @@
       placeholder="Please enter your email."
       :errorMessage="errorMessage"
       label="email"
+      labelPrimary
     />
     <BaseInput
       class="register-card__password"
@@ -20,6 +21,7 @@
       type="password"
       placeholder="Please enter your password."
       label="password"
+      labelPrimary
     />
     <p
       class="register-card__valid-flag"

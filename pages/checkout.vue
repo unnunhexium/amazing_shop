@@ -8,6 +8,7 @@
         <CheckoutCard />
         <SummaryCard class="checkout-page__cart-card" />
       </div>
+      <!-- <SuccessCard /> -->
     </div>
   </div>
 </template>

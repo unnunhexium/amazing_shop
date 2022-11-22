@@ -1,28 +1,46 @@
 <template>
   <div class="cart-card">
-    <div class="text-wrapper-h">
-      <h6 class="cart-card__header">Cart (3)</h6>
-      <BaseButton class="cart-card__remove-button" type="tertiary">
+    <div v-if="!disabled" class="text-wrapper-h">
+      <h6 class="cart-card__header">Cart ({{ itemsQty }})</h6>
+      <BaseButton
+        class="cart-card__remove-button"
+        type="tertiary"
+        @click="cartStore.removeAllItems"
+        :disabled="disabled"
+      >
         Remove all
       </BaseButton>
     </div>
+    <div v-if="disabled">
+      <h6 class="cart-card__header">Your cart is empty</h6>
+    </div>
+
     <ul class="cart-card__items-wrapper">
-      <li class="cart-card__item">
+      <li
+        class="cart-card__item"
+        v-for="item in cartStore.cartData"
+        :key="item.name_short"
+      >
         <img
-          :src="`http://localhost:1337/uploads/image_gallery_3_c88b6d67b1.jpg`"
+          :src="`http://localhost:1337${item.image}`"
           class="cart-card__img"
         />
         <div class="text-wrapper-v">
-          <h1 class="cart-card__item-header">XX99 MK II</h1>
-          <p class="cart-card__item-price">$ 899</p>
+          <h1 class="cart-card__item-header">{{ item.name_short }}</h1>
+          <p class="cart-card__item-price">$ {{ item.price }}</p>
         </div>
-
-        <BaseCounter class="cart-card__item-counter" :reduced="true" />
+        <BaseCounter
+          class="cart-card__item-counter"
+          :reduced="true"
+          :value="item.qty"
+          @increment="increment(item.id)"
+          @decrement="decrement(item.id)"
+        />
       </li>
     </ul>
     <div class="text-wrapper-h">
       <p class="cart-card__price-text">Total</p>
-      <p class="cart-card__price">$ 4 899</p>
+      <p class="cart-card__price">$ {{ total }}</p>
     </div>
     <BaseButton
       class="cart-card__submit-button"
@@ -34,8 +52,34 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script setup lang="ts">
+import { useCartStore } from '@/store/cart';
+
+const cartStore = useCartStore();
+
+const total = computed(() => {
+  return cartStore.cartData
+    .map(({ price }) => price)
+    .reduce((prev, curr) => prev + curr, 0);
+});
+
+const itemsQty = computed(() => {
+  return cartStore.cartData
+    .map(({ qty }) => qty)
+    .reduce((prev, curr) => prev + curr, 0);
+});
+
+function increment(id) {
+  cartStore.addToCart(id, 1);
+}
+
+function decrement(id) {
+  cartStore.removeOneItem(id);
+}
+
+const disabled = computed(() => {
+  return cartStore.cart.length === 0;
+});
 </script>
 
 <style lang="scss" scoped>
@@ -60,12 +104,13 @@ export default {};
     margin-right: 1em;
   }
   &__items-wrapper {
-    margin: 2em 0;
+    margin: 2em 0 0.5em;
   }
   &__item {
     display: flex;
     align-items: center;
     list-style: none;
+    padding-bottom: 1.5em;
   }
   &__item-header,
   &__item-price {

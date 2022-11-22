@@ -1,61 +1,64 @@
 import { defineStore } from 'pinia';
 import { Cart } from '@/interfaces/Cart';
 import { Product } from '@/interfaces/Product';
-import { DisplayCart } from '@/interfaces/DisplayCart';
 
 interface State {
-  cart: Cart | {};
-  displayCart: DisplayCart[] | [];
+  cart: Cart[];
+  displayCart: Product[];
 }
 
 export const useCartStore = defineStore('cart', {
   state: () => {
-    return { cart: {}, displayCart: [] } as State;
+    return { cart: [], displayCart: [] } as State;
   },
   actions: {
-    async loadCartInstance() {
-      const cs = localStorage.getItem('cart');
-      if (!cs) this.cart = {};
-      else this.cart = JSON.parse(cs);
-    },
-    addToCart(product: { id: number; qty: number }) {
-      const cs = localStorage.getItem('cart');
-      const uuid = crypto.randomUUID();
-
-      let isAdded = false;
-
-      if (!cs) this.cart = { cid: uuid, products: [product] };
-      else {
-        let cartLocalStorage = JSON.parse(cs);
-        cartLocalStorage.products = cartLocalStorage.products.map((item) => {
-          if (item.id == product.id) {
-            isAdded = true;
-            return { id: item.id, qty: item.qty + 1 };
-          }
-          return { id: item.id, qty: item.qty };
+    async addToCart(id: number, qty: number) {
+      if (this.cart.findIndex((item) => item.id === id) < 0) {
+        this.cart = [...this.cart, { id, qty }];
+        const { data: product } = await useApi<{ data: Product }>(
+          `products/${id}?populate=*`
+        );
+        this.displayCart = [...this.displayCart, { ...product, qty }];
+      } else {
+        this.cart = this.cart.map((item) => {
+          return item.id == id ? { ...item, qty: item.qty + qty } : item;
         });
-        if (!isAdded)
-          cartLocalStorage.products.push({ id: product.id, qty: product.qty });
-        this.cart = cartLocalStorage;
+        this.displayCart = this.displayCart.map((item) => {
+          return item.id == id ? { ...item, qty: item.qty + qty } : item;
+        });
       }
-      localStorage.setItem('cart', JSON.stringify(this.cart));
     },
-    removeFromCart(id: number) {
-      this.cart.products = this.cart.products.filter((item) => item.id != id);
-      localStorage.setItem('cart', JSON.stringify(this.cart));
+    removeOneItem(id: number) {
+      const itemToBeRemoved = this.cart.find((item) => item.id === id);
+      if (itemToBeRemoved.qty === 1) {
+        this.cart = this.cart.filter((item) => item.id != id);
+        this.displayCart = this.displayCart.filter((item) => item.id != id);
+      } else {
+        this.cart = this.cart.map((item) =>
+          item.id === id ? { ...item, qty: item.qty - 1 } : item
+        );
+        this.displayCart = this.displayCart.map((item) =>
+          item.id === id ? { ...item, qty: item.qty - 1 } : item
+        );
+      }
+    },
+    removeAllItems() {
+      this.cart = [];
+      this.displayCart = [];
     },
     async getCartItems() {
       const promises = [];
-      this.cart.products.forEach((product) => {
+      if (this.cart.length === 0) {
+        return;
+      }
+      this.cart.forEach((product) => {
         promises.push(
           $fetch(`http://localhost:1337/api/products/${product.id}?populate=*`)
         );
       });
       const data = await Promise.all(promises);
       const cart = data.map((item) => {
-        const { qty } = this.cart.products.find(
-          (product) => product.id == item.data.id
-        );
+        const { qty } = this.cart.find((product) => product.id == item.data.id);
         return { ...item.data, qty };
       });
 
@@ -73,4 +76,5 @@ export const useCartStore = defineStore('cart', {
         qty: item.qty,
       })),
   },
+  persist: true,
 });

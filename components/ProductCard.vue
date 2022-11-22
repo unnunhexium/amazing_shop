@@ -22,7 +22,11 @@
       <div v-else>
         <p class="product-card__price">$ {{ product.price }}</p>
         <div class="product-card__button-wrapper">
-          <BaseCounter />
+          <BaseCounter
+            @increment="increment"
+            @decrement="decrement"
+            :value="counterValue"
+          />
           <BaseButton type="primary" @click="addToCart">Add to cart</BaseButton>
         </div>
       </div>
@@ -32,22 +36,25 @@
 
 <script setup lang="ts">
 import { useCartStore } from '@/store/cart';
-import { storeToRefs } from 'pinia';
+
+type Product = {
+  id: number;
+  name: string;
+  description: string;
+  flag: string;
+  imageUrl: string;
+  price: number;
+};
 
 interface Props {
-  product: {
-    id: number;
-    name: string;
-    description: string;
-    flag: string;
-    imageUrl: string;
-    price: number;
-  };
+  product: Product;
   reversed?: boolean;
   simplified?: boolean;
   reduced?: boolean;
 }
 const props = defineProps<Props>();
+
+const counterValue = ref(1);
 
 const productCardClasses = computed(() => {
   return [
@@ -61,11 +68,19 @@ const productCardClasses = computed(() => {
 });
 
 const cartStore = useCartStore();
-const { cart } = storeToRefs(cartStore);
 
 const addToCart = () => {
-  cartStore.addToCart({ id: props.product.id, qty: 1 });
+  console.log(counterValue);
+  cartStore.addToCart(props.product.id, counterValue.value);
 };
+
+function increment() {
+  counterValue.value++;
+}
+
+function decrement() {
+  counterValue.value--;
+}
 </script>
 
 <style lang="scss" scoped>

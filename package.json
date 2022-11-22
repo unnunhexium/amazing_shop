@@ -17,6 +17,6 @@
     "@pinia/nuxt": "^0.4.2",
     "@vuepic/vue-datepicker": "^3.5.2",
     "nuxt-stripe-module": "^3.2.0",
-    "pinia-plugin-persistedstate": "^2.3.0"
+    "pinia-plugin-persistedstate": "^2.4.0"
   }
 }

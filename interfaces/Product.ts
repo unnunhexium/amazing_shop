@@ -1,5 +1,6 @@
 export interface Product {
   id: number;
+  qty?: number;
   attributes: ProductAttr;
 }
 export interface ProductAttr {

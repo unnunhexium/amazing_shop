@@ -2,7 +2,7 @@
   <div class="checkout-card">
     <h3 class="checkout-card__header">Checkout</h3>
     <h6 class="checkout-card__subheader">Billing details</h6>
-    <div class="checkout-card__wrapper-h">
+    <div class="wrapper-h-grid">
       <BaseInput
         class="checkout-card__input"
         @update:modelValue="
@@ -32,7 +32,7 @@
         :labelBold="true"
       />
     </div>
-    <div class="checkout-card__wrapper-h">
+    <div class="wrapper-h-grid">
       <BaseInput
         class="checkout-card__input"
         @update:modelValue="
@@ -60,8 +60,8 @@
         :labelBold="true"
       />
     </div>
-    <h6 class="checkout-card__subheader">Shipping info</h6>
-    <div class="checkout-card__wrapper-h">
+    <h6 class="checkout-card__subheader">Address details</h6>
+    <div class="wrapper-h-grid">
       <BaseInput
         class="account-card__input"
         @update:modelValue="
@@ -91,7 +91,7 @@
         :labelBold="true"
       />
     </div>
-    <div class="checkout-card__wrapper-h">
+    <div class="wrapper-h-grid">
       <BaseInput
         class="account-card__input"
         @update:modelValue="

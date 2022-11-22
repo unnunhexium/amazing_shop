@@ -61,7 +61,7 @@ const total = computed(() => {
 });
 
 const vat = computed(() => {
-  return +total.value * 0.23;
+  return Math.round(+total.value * 0.23);
 });
 
 const grandTotal = computed(() => {

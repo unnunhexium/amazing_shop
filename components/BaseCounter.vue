@@ -2,33 +2,27 @@
   <div :class="counterClasses">
     <button
       class="base-counter__button"
-      @click="decrement"
-      :disabled="value === 0"
+      @click="emit('decrement')"
+      :disabled="props.value === 0"
     >
       -
     </button>
-    <p class="base-counter__display">{{ value }}</p>
-    <button class="base-counter__button" @click="increment">+</button>
+    <p class="base-counter__display">{{ props.value }}</p>
+    <button class="base-counter__button" @click="$emit('increment')">+</button>
   </div>
 </template>
 
 <script setup lang="ts">
-const value = ref(0);
-
 const props = withDefaults(
-  defineProps<{ disabled?: boolean; reduced?: boolean }>(),
+  defineProps<{ disabled?: boolean; reduced?: boolean; value?: number }>(),
   {
     disabled: false,
     reduced: false,
+    value: 1,
   }
 );
 
-function increment() {
-  this.value++;
-}
-function decrement() {
-  this.value--;
-}
+const emit = defineEmits(['decrement', 'increment']);
 
 const counterClasses = computed(() => {
   return ['base-counter', { 'base-counter--reduced': props.reduced }];
